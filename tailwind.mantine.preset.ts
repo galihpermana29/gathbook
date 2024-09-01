@@ -427,6 +427,7 @@ export const mantineTailwind = {
             8: "var(--mantine-color-orange-8)",
             9: "var(--mantine-color-orange-9)",
           },
+          background: "var(--mantine-color-body)",
         },
       },
       boxShadow: {

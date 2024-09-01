@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Button, Title } from "@mantine/core";
+
+import { HeroSection } from "./_components/hero-section";
+import { ReviewsSection } from "./_components/reviews-section";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -7,12 +9,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex size-full flex-col items-center justify-center gap-2">
-      <div className="flex flex-col items-center">
-        <Title order={1}>Hello, world!</Title>
-        <p>This is a paragraph</p>
-      </div>
-      <Button>Button</Button>
-    </main>
+    <div className="flex w-full flex-col gap-x-8 gap-y-12 py-4 lg:py-8">
+      <HeroSection />
+      <ReviewsSection />
+    </div>
   );
 }

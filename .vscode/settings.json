@@ -1,11 +1,10 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.resolveGlobalModules": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.addMissingImports.ts": "explicit",
-    "source.organizeImports": "always",
-    "source.sortImports": "always"
+    "source.organizeImports": "explicit",
+    "source.sortImports": "explicit"
   }
 }

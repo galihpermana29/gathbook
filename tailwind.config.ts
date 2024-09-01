@@ -12,11 +12,11 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: { DEFAULT: "2rem", "3xl": "4rem" },
       screens: { "3xl": em(1792) },
     },
     extend: {
-      screens: { xs: em(576) },
+      screens: { xs: em(576), "3xl": em(1792) },
     },
   },
   plugins: [],

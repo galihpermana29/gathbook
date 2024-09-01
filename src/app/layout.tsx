@@ -16,11 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript defaultColorScheme="light" />
+        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body className="scroll-smooth antialiased">
         <MantineProvider
-          defaultColorScheme="light"
+          defaultColorScheme="auto"
           theme={theme}
         >
           {children}
