@@ -1,6 +1,6 @@
 import { createTheme, em } from "@mantine/core";
 
-import { bodyFont, headingsFont } from "@/lib/styles/fonts";
+import { bodyFont, headingsFont } from "./fonts";
 
 export const theme = createTheme({
   cursorType: "pointer",
@@ -8,7 +8,7 @@ export const theme = createTheme({
   defaultRadius: "xl",
   fontFamily: bodyFont.style.fontFamily,
   headings: { fontFamily: headingsFont.style.fontFamily },
-  primaryColor: "violet",
+  primaryColor: "dark",
   breakpoints: {
     xs: em(576),
     sm: em(640),

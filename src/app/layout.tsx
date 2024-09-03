@@ -1,10 +1,12 @@
 import { metadataSettings } from "@/lib/metadata";
 
-import "@/lib/styles/globals.css";
+import "@/styles/globals.css";
 
+import { theme } from "@/styles/mantine-theme";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { Toaster } from "sonner";
 
-import { theme } from "@/lib/styles/mantine-theme";
+import { TanstackQueryProvider } from "@/components/providers/tanstack-query-provider";
 
 export const metadata = metadataSettings;
 
@@ -16,15 +18,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript defaultColorScheme="auto" />
+        <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body className="scroll-smooth antialiased">
-        <MantineProvider
-          defaultColorScheme="auto"
-          theme={theme}
-        >
-          {children}
-        </MantineProvider>
+        <TanstackQueryProvider>
+          <MantineProvider
+            defaultColorScheme="light"
+            theme={theme}
+          >
+            <Toaster
+              theme="light"
+              richColors
+            />
+            {children}
+          </MantineProvider>
+        </TanstackQueryProvider>
       </body>
     </html>
   );

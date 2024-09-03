@@ -9,7 +9,7 @@ export const SectionTitle = () => {
       >
         SIGN IN
       </Title>
-      <p className="text-pretty text-md font-light">
+      <p className="text-pretty text-md">
         Delve deep into the world of literacy
       </p>
     </div>
