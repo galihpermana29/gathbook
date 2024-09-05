@@ -1,11 +1,32 @@
-import { BookSectionLoading } from "./_components/books-section";
-import { HeroSection } from "./_components/hero-section";
+import { Loader } from "@mantine/core";
 
-export default function LoadingRoot() {
+import { MotionTitle } from "@/components/motion/motion-title";
+
+export default function LoadingDefaultGroup() {
   return (
-    <div className="flex h-[calc(100dvh-80px)] flex-grow flex-col gap-x-8 gap-y-12 overflow-hidden">
-      <HeroSection />
-      <BookSectionLoading />
+    <div className="flex flex-grow flex-col items-center justify-center gap-x-9 gap-y-8 text-center sm:flex-row sm:text-left">
+      <Loader size="xl" />{" "}
+      <div className="flex flex-col gap-2 sm:gap-1">
+        <MotionTitle
+          order={1}
+          initial={{ translateX: -50, opacity: 0 }}
+          animate={{ translateX: 0, opacity: 1 }}
+          className="hidden text-3xl sm:block"
+        >
+          LOADING...
+        </MotionTitle>
+        <MotionTitle
+          order={1}
+          initial={{ translateY: 20, opacity: 0 }}
+          animate={{ translateY: 0, opacity: 1 }}
+          className="text-3xl sm:hidden"
+        >
+          LOADING...
+        </MotionTitle>
+        <p className="max-w-64 text-pretty sm:max-w-[80ch]">
+          Please wait while we load your content...
+        </p>
+      </div>
     </div>
   );
 }

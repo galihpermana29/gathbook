@@ -9,7 +9,7 @@ import { LogOutButton } from "./log-out-button";
 
 export const DefaultTopNav = () => {
   return (
-    <header className="sticky top-0 z-10 flex w-full items-center justify-between gap-4 px-8 py-4 backdrop-blur-sm">
+    <header className="container sticky top-0 z-10 flex w-full items-center justify-between gap-4 py-4 backdrop-blur-sm">
       <Link href="/">
         <Logo
           className="shrink-0"

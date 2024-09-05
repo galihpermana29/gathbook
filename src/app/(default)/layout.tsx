@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+
+import { DefaultFooter } from "./_components/default-footer";
 import { DefaultTopNav } from "./_components/default-top-nav";
 
 export default function DefaultLayout({
@@ -6,9 +9,12 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="no-scrollbar flex min-h-dvh flex-col">
-      <DefaultTopNav />
-      <main className="flex w-full flex-grow overflow-hidden">{children}</main>
+    <div className="no-scrollbar flex h-dvh flex-col overflow-y-scroll">
+      <Suspense>
+        <DefaultTopNav />
+      </Suspense>
+      <main className="flex w-full flex-grow">{children}</main>
+      <DefaultFooter />
     </div>
   );
 }

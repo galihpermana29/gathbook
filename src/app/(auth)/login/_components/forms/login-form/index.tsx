@@ -53,7 +53,7 @@ export const LoginForm = (props: React.HTMLAttributes<HTMLFormElement>) => {
         component={Link}
         href="/register"
         type="button"
-        loading={isPending}
+        disabled={isPending}
         fullWidth
         variant="default"
       >

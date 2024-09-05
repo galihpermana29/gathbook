@@ -10,11 +10,13 @@ export const metadata: Metadata = {
   title: "Home",
 };
 
-export default async function Home() {
+export default function Home() {
   void getBooks();
   return (
-    <div className="flex h-[calc(100dvh-80px)] flex-grow flex-col gap-x-8 gap-y-12 overflow-hidden">
-      <HeroSection />
+    <div className="flex flex-grow flex-col justify-evenly gap-4 overflow-hidden pb-8 pt-0">
+      <Suspense>
+        <HeroSection />
+      </Suspense>
       <Suspense fallback={<BookSectionLoading />}>
         <BooksSection />
       </Suspense>

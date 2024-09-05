@@ -8,7 +8,7 @@ import { clearServerSession } from "@/lib/utils/session";
 export const LogOutButton = () => {
   const logOut = async () => {
     "use server";
-    clearServerSession();
+    await clearServerSession();
     return redirect("/login");
   };
 

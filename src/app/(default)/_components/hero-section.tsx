@@ -1,15 +1,20 @@
 import { Title } from "@mantine/core";
 
-export const HeroSection = () => {
+import { getServerSession } from "@/lib/utils/session";
+
+export const HeroSection = async () => {
+  const user = await getServerSession();
   return (
-    <div className="container flex h-[calc(50dvh-80px-4rem)] flex-col items-center justify-center gap-5 text-balance text-center">
+    <div className="container flex flex-col items-start justify-center gap-5 text-balance">
       <Title
         order={1}
         className="text-pretty text-4xl leading-tight tracking-tighter sm:text-6xl xs:text-5xl"
       >
-        Keep the story going...
+        <span className="inline sm:hidden">How are you? </span>
+        <span className="hidden sm:inline">Hello,</span>
+        <br className="block sm:hidden" /> {user?.name}
       </Title>
-      <p className="max-w-[40ch] text-sm xs:max-w-[50ch] xs:text-base">
+      <p className="text-sm xs:max-w-[50ch] xs:text-base">
         Don&apos;t let the story end just yet! Continue reading your last book
         and immerse yourself in the world of literature.
       </p>
