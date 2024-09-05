@@ -5,10 +5,18 @@ import { isAdmin } from "./lib/utils/is-admin";
 import { isRouteMatch } from "./lib/utils/is-route-match";
 import { getServerSession } from "./lib/utils/session";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+/**
+ * Middleware function for handling authentication and authorization.
+ *
+ * - Redirects unauthenticated users from protected routes to the login page.
+ * - Redirects authenticated users from login or auth routes to the dashboard or home page based on their role.
+ * - Redirects non-admin users from admin routes to the home page.
+ *
+ * @param {NextRequest} request - The incoming request object.
+ */
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const session = getServerSession();
+  const session = await getServerSession();
 
   const isAuthPath = isRouteMatch(pathname, authRoutes);
   const isAdminPath = isRouteMatch(pathname, adminRoutes);
@@ -23,7 +31,6 @@ export function middleware(request: NextRequest) {
 
   const sessionIsAdmin = isAdmin(session);
   const fallbackURL = sessionIsAdmin ? "/dashboard" : "/";
-  console.log(sessionIsAdmin, fallbackURL, isAdminPath);
 
   if (isAuthPath) {
     return NextResponse.redirect(new URL(fallbackURL, request.url));
@@ -36,6 +43,15 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
+/**
+ * Configuration object for the middleware.
+ *
+ * This configuration ensures the middleware is applied to all routes except:
+ * - API routes (`api`)
+ * - Static files (`_next/static`)
+ * - Image optimization files (`_next/image`)
+ * - Metadata files (`favicon.ico`, `sitemap.xml`, `robots.txt`)
+ */
 export const config = {
   matcher: [
     /*

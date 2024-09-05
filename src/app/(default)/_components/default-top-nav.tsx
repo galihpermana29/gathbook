@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { getServerSession } from "@/lib/utils/session";
@@ -16,7 +17,9 @@ export const DefaultTopNav = () => {
         />
       </Link>
       <div className="flex items-center gap-4 lg:gap-6">
-        <ProfileIndicator />
+        <Suspense>
+          <ProfileIndicator />
+        </Suspense>
         <div className="flex items-center gap-2">
           <ConnectWalletButton />
           <LogOutButton />
@@ -26,8 +29,8 @@ export const DefaultTopNav = () => {
   );
 };
 
-const ProfileIndicator = () => {
-  const session = getServerSession();
+const ProfileIndicator = async () => {
+  const session = await getServerSession();
   if (!session) return null;
 
   return (

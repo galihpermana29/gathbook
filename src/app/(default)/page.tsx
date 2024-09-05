@@ -1,17 +1,23 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
+import { getBooks } from "@/server/actions/books";
+
+import { BookSectionLoading, BooksSection } from "./_components/books-section";
 import { HeroSection } from "./_components/hero-section";
-import { ReviewsSection } from "./_components/reviews-section";
 
 export const metadata: Metadata = {
   title: "Home",
 };
 
-export default function Home() {
+export default async function Home() {
+  void getBooks();
   return (
-    <div className="flex w-full flex-col gap-x-8 gap-y-12 py-4 lg:py-8">
+    <div className="flex h-[calc(100dvh-80px)] flex-grow flex-col gap-x-8 gap-y-12 overflow-hidden">
       <HeroSection />
-      <ReviewsSection />
+      <Suspense fallback={<BookSectionLoading />}>
+        <BooksSection />
+      </Suspense>
     </div>
   );
 }

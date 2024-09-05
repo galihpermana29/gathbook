@@ -1,6 +1,6 @@
 "use client";
 
-import { registerThenLoginAction } from "@/actions/auth/register-then-login-action";
+import { registerThenLoginAction } from "@/server/actions/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 

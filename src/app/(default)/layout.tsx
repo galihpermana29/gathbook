@@ -8,7 +8,7 @@ export default function DefaultLayout({
   return (
     <div className="no-scrollbar flex min-h-dvh flex-col">
       <DefaultTopNav />
-      <main className="w-full overflow-hidden">{children}</main>
+      <main className="flex w-full flex-grow overflow-hidden">{children}</main>
     </div>
   );
 }
