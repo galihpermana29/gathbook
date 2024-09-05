@@ -15,4 +15,4 @@ const TitleComponent = React.forwardRef<HTMLHeadingElement, TitleProps>(
 );
 
 TitleComponent.displayName = "Title";
-export const MotionTitle = motion(TitleComponent);
+export const MotionTitle = motion.create(TitleComponent);

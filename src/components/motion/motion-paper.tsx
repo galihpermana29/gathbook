@@ -15,4 +15,4 @@ const PaperComponent = React.forwardRef<HTMLDivElement, PaperProps>(
 );
 
 PaperComponent.displayName = "Paper";
-export const MotionPaper = motion(PaperComponent);
+export const MotionPaper = motion.create(PaperComponent);

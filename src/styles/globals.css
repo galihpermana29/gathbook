@@ -19,9 +19,25 @@
 @import "@mantine/core/styles/Title.css";
 @import "@mantine/core/styles/ActionIcon.css";
 @import "@mantine/core/styles/Paper.css";
+@import "@mantine/core/styles/Skeleton.css";
+@import "@mantine/core/styles/Tree.css";
 
 @layer {
   @tailwind base;
+
+  *,
+  ::before,
+  ::after {
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--mantine-color-gray-3);
+  }
+
+  [data-mantine-color-scheme="dark"] *,
+  [data-mantine-color-scheme="dark"] ::before,
+  [data-mantine-color-scheme="dark"] ::after {
+    border-color: var(--mantine-color-dark-5);
+  }
 }
 @tailwind components;
 @tailwind utilities;

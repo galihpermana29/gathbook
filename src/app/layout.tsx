@@ -4,9 +4,9 @@ import "@/styles/globals.css";
 
 import { theme } from "@/styles/mantine-theme";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import { Toaster } from "sonner";
 
 import { TanstackQueryProvider } from "@/components/providers/tanstack-query-provider";
+import { ThemedToaster } from "@/components/themed-toaster";
 
 export const metadata = metadataSettings;
 
@@ -18,18 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <ColorSchemeScript defaultColorScheme="light" />
+        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body className="scroll-smooth antialiased">
         <TanstackQueryProvider>
           <MantineProvider
-            defaultColorScheme="light"
+            defaultColorScheme="auto"
             theme={theme}
           >
-            <Toaster
-              theme="light"
-              richColors
-            />
+            <ThemedToaster />
             {children}
           </MantineProvider>
         </TanstackQueryProvider>

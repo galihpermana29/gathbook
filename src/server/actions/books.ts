@@ -1,10 +1,13 @@
 "use server";
 
 import { cache } from "react";
+import { revalidatePath } from "next/cache";
 
 import { API_ENDPOINT } from "@/lib/constants";
 import type {
   Book,
+  BuyBookPayload,
+  BuyBookResponse,
   CreateBookPayload,
   CreateBookResponse,
   GetAllBooksResponse,
@@ -83,3 +86,23 @@ export const updateBook = cache(
     return data;
   },
 );
+
+export const buyBook = cache(async (id: Book["id"]) => {
+  const token = await getBearerToken();
+  const headers = { Authorization: `Bearer ${token}` };
+  const payload: BuyBookPayload = { book_id: parseInt(id.toString()) };
+
+  const res = await fetch(`${API_ENDPOINT}/buy`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    handleThrowError(res);
+  }
+
+  const { data }: BuyBookResponse = await res.json();
+  revalidatePath(`/book/${id}`);
+  return data;
+});
