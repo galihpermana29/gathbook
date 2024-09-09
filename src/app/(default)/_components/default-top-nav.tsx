@@ -1,28 +1,31 @@
 import { Suspense } from "react";
 import Link from "next/link";
 
+import type { User } from "@/lib/types/user";
 import { getServerSession } from "@/lib/utils/session";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 import { ConnectWalletButton } from "./connect-wallet-button";
+import { DashboardButton } from "./dashboard-button";
 import { LogOutButton } from "./log-out-button";
 
-export const DefaultTopNav = () => {
+export const DefaultTopNav = async () => {
+  const session = await getServerSession();
   return (
     <header className="container sticky top-0 z-10 flex w-full items-center justify-between gap-4 py-4 backdrop-blur-sm">
       <Link href="/">
-        <Logo
-          className="shrink-0"
-          size="3rem"
-        />
+        <Logo />
       </Link>
-      <div className="flex items-center gap-4 lg:gap-6">
+      <div className="flex items-center gap-4">
         <Suspense>
-          <ProfileIndicator />
+          <ProfileIndicator session={session} />
         </Suspense>
         <div className="flex items-center gap-2">
           <ConnectWalletButton />
+          <Suspense>
+            <DashboardButton session={session} />
+          </Suspense>
           <LogOutButton />
           <ThemeToggle
             variant="light"
@@ -34,10 +37,8 @@ export const DefaultTopNav = () => {
   );
 };
 
-const ProfileIndicator = async () => {
-  const session = await getServerSession();
+const ProfileIndicator = async ({ session }: { session: User | undefined }) => {
   if (!session) return null;
-
   return (
     <p className="line-clamp-1 hidden max-w-48 text-ellipsis text-sm font-semibold hover:text-mtn-primary-filled xs:inline">
       {session.name}
