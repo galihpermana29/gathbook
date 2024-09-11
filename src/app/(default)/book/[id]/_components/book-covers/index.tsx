@@ -10,6 +10,7 @@ export const BookCovers = ({
   title: Book["title"];
   covers: Book["cover"];
 }) => {
+  console.log(covers);
   return (
     <div className="no-scrollbar container flex w-full items-start justify-evenly gap-4 overflow-x-scroll lg:mx-0 lg:w-auto lg:justify-normal lg:gap-6 lg:overflow-x-visible lg:px-0">
       <CoversSwitch
@@ -17,13 +18,20 @@ export const BookCovers = ({
         covers={covers}
       />
       <div className="flex items-center justify-evenly gap-4 pb-3 lg:hidden">
-        {covers.map((cover) => (
+        {covers.length > 0 ? (
+          covers.map((cover) => (
+            <BookCoverCard
+              key={cover}
+              coverUrl={cover}
+              alt={`Cover image of ${title}`}
+            />
+          ))
+        ) : (
           <BookCoverCard
-            key={cover}
-            coverUrl={cover}
+            coverUrl=""
             alt={`Cover image of ${title}`}
           />
-        ))}
+        )}
       </div>
     </div>
   );

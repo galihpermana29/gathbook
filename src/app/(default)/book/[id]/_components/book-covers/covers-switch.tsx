@@ -48,18 +48,27 @@ export const CoversSwitch = ({
           initial={false}
           mode="wait"
         >
-          {covers.map(
-            (cover, arrIndex) =>
-              arrIndex === index && (
-                <MotionBookPaperCard
-                  key={cover + index}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  initial={{ opacity: 0, y: -20 }}
-                  coverUrl={cover}
-                  alt={`Cover image of ${title}`}
-                />
-              ),
+          {covers.length > 0 ? (
+            covers.map(
+              (cover, arrIndex) =>
+                arrIndex === index && (
+                  <MotionBookPaperCard
+                    key={cover + index}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: -20 }}
+                    coverUrl={cover}
+                    alt={`Cover image of ${title}`}
+                  />
+                ),
+            )
+          ) : (
+            <MotionBookPaperCard
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: -20 }}
+              alt={`Cover image of ${title}`}
+            />
           )}
         </AnimatePresence>
       </div>
