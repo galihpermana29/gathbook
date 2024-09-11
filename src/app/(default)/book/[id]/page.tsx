@@ -22,7 +22,10 @@ export default async function BookDetailPage({ params }: PageProps) {
   return (
     <div className="flex w-full flex-col justify-between gap-16">
       <div className="mx-auto flex w-full max-w-[80ch] flex-grow flex-col items-center justify-center gap-12 pt-4 lg:max-w-[100ch] lg:flex-row lg:gap-8 lg:px-16">
-        <BookCovers covers={book.cover} />
+        <BookCovers
+          title={book.title}
+          covers={book.cover}
+        />
         <div className="container flex flex-col gap-6">
           <BookSummary
             author={book.author}

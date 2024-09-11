@@ -60,7 +60,12 @@ export default function LoadingBookDetailPage() {
               >
                 Table of Contents
               </Title>
-              <Skeleton className="h-60 w-full" />
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Skeleton
+                  key={index}
+                  className="h-7 w-full"
+                />
+              ))}
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
@@ -70,7 +75,7 @@ export default function LoadingBookDetailPage() {
                 >
                   Book Synopsis
                 </Title>
-                <Skeleton className="h-36 w-full" />
+                <Skeleton className="h-7 w-full" />
               </div>
               <div className="flex flex-col gap-2">
                 <Title
@@ -79,7 +84,7 @@ export default function LoadingBookDetailPage() {
                 >
                   Author of The Book
                 </Title>
-                <Skeleton className="h-8 w-full" />
+                <Skeleton className="h-7 w-full" />
               </div>
               <div className="flex flex-col gap-2">
                 <Title
@@ -88,7 +93,7 @@ export default function LoadingBookDetailPage() {
                 >
                   Book Price
                 </Title>
-                <Skeleton className="h-8 w-full" />
+                <Skeleton className="h-7 w-full" />
               </div>
             </div>
           </div>

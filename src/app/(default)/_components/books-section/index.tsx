@@ -18,6 +18,7 @@ export const BooksSection = async () => {
           id={book.id}
           title={book.title}
           author={book.author}
+          cover={book.cover}
         />
       ))}
     </motion.div>

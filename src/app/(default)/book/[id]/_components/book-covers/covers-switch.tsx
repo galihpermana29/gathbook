@@ -7,9 +7,15 @@ import { AnimatePresence } from "framer-motion";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 import type { Book } from "@/lib/types/books";
-import { MotionPaper } from "@/components/motion/motion-paper";
+import { MotionBookPaperCard } from "@/components/motion/motion-book-cover-card";
 
-export const CoversSwitch = ({ covers }: { covers: Book["cover"] }) => {
+export const CoversSwitch = ({
+  title,
+  covers,
+}: {
+  title: Book["title"];
+  covers: Book["cover"];
+}) => {
   const [index, setIndex] = useState(0);
   const handleClickUp = () =>
     setIndex((prev) => (prev === covers.length - 1 ? 0 : prev + 1));
@@ -45,13 +51,13 @@ export const CoversSwitch = ({ covers }: { covers: Book["cover"] }) => {
           {covers.map(
             (cover, arrIndex) =>
               arrIndex === index && (
-                <MotionPaper
+                <MotionBookPaperCard
                   key={cover + index}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   initial={{ opacity: 0, y: -20 }}
-                  className="hidden aspect-[4/5] h-96 w-auto lg:block"
-                  withBorder
+                  coverUrl={cover}
+                  alt={`Cover image of ${title}`}
                 />
               ),
           )}

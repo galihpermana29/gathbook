@@ -13,7 +13,7 @@ import { LogOutButton } from "./log-out-button";
 export const DefaultTopNav = async () => {
   const session = await getServerSession();
   return (
-    <header className="container sticky top-0 z-10 flex w-full items-center justify-between gap-4 py-4 backdrop-blur-sm">
+    <header className="container sticky top-0 z-50 flex w-full items-center justify-between gap-4 py-4 backdrop-blur-sm">
       <Link href="/">
         <Logo />
       </Link>
