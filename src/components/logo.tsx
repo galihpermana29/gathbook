@@ -1,4 +1,4 @@
-export const Logo = () => {
+export const Logo = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       width="125"
@@ -6,6 +6,7 @@ export const Logo = () => {
       viewBox="0 0 3072 500"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M2637.36 90.7266H2699.27V248.734L2860.41 90.7266H2939.7L2789.31 236.43L2939.7 396H2857.28L2744.78 279.594L2699.27 323.539V396H2637.36V90.7266Z"
