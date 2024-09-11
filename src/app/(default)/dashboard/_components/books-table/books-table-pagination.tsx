@@ -11,7 +11,7 @@ export const BooksTablePagination = async ({
   search: string | undefined;
   page: string | undefined;
 }) => {
-  const rowLimit = limit ? parseInt(limit) : undefined;
+  const rowLimit = limit ? parseInt(limit) : 10;
   const tablePage = page ? parseInt(page) : 1;
   const { totalPage } = await paginatedGetBooks({ limit: rowLimit, search });
 

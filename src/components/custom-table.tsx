@@ -58,8 +58,8 @@ export const CustomTableLoading = ({
   columns,
   rowCount = 10,
 }: TableLoadingProps) => {
-  return Array.from({ length: rowCount }).map((row) => (
-    <TableTr key={`row-${row}`}>
+  return Array.from({ length: rowCount }).map((_, index) => (
+    <TableTr key={`row-${index}`}>
       {columns.map((column) => (
         <TableTd key={`column-${column}`}>
           <Skeleton className="h-6 w-full" />

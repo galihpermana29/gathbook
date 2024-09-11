@@ -21,6 +21,7 @@
 @import "@mantine/core/styles/Paper.css";
 @import "@mantine/core/styles/Skeleton.css";
 @import "@mantine/core/styles/Tree.css";
+@import "@mantine/tiptap/styles.css";
 
 @layer {
   @tailwind base;

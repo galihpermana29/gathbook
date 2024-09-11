@@ -36,7 +36,7 @@ export const DefaultFooter = () => {
           <Logo
             className="inline"
             width={80}
-            height="auto"
+            height={15}
           />
         </div>
         <div className="flex items-center gap-2">

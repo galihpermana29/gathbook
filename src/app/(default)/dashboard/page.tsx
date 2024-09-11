@@ -25,7 +25,7 @@ export default function DashboardPage({
 }) {
   const { limit, page, search } = searchParams;
   void paginatedGetBooks({
-    limit: limit ? parseInt(limit) : undefined,
+    limit: limit ? parseInt(limit) : 10,
     search,
   });
 

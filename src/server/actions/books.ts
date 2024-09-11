@@ -53,10 +53,11 @@ export const getBookById = cache(async (id: Book["id"]) => {
 export const createBook = cache(async (payload: CreateBookPayload) => {
   const token = await getBearerToken();
   const headers = { Authorization: `Bearer ${token}` };
+  const body = { ...payload, price: payload.price.toString() };
   const res = await fetch(`${API_ENDPOINT}/book`, {
     method: "POST",
     headers,
-    body: JSON.stringify(payload),
+    body: JSON.stringify(body),
   });
 
   if (!res.ok) {
@@ -72,10 +73,11 @@ export const updateBook = cache(
   async (id: Book["id"], payload: UpdateBookPayload) => {
     const token = await getBearerToken();
     const headers = { Authorization: `Bearer ${token}` };
+    const body = { ...payload, price: payload.price.toString() };
     const res = await fetch(`${API_ENDPOINT}/book/${id}`, {
-      method: "PATCH",
+      method: "PUT",
       headers,
-      body: JSON.stringify(payload),
+      body: JSON.stringify(body),
     });
 
     if (!res.ok) {

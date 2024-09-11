@@ -1,4 +1,6 @@
-import { ActionIcon, TableTd, TableTr } from "@mantine/core";
+import Link from "next/link";
+
+import { ActionIcon, NumberFormatter, TableTd, TableTr } from "@mantine/core";
 import { FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 
@@ -14,7 +16,7 @@ export const BooksTableBody = async ({
   page: string | undefined;
   search: string | undefined;
 }) => {
-  const rowLimit = limit ? parseInt(limit) : undefined;
+  const rowLimit = limit ? parseInt(limit) : 10;
   const tablePage = page ? parseInt(page) : 1;
   const { data: booksData } = await paginatedGetBooks({
     limit: rowLimit,
@@ -32,9 +34,20 @@ export const BooksTableBody = async ({
     <TableTr key={book.id}>
       <TableTd>{book.title}</TableTd>
       <TableTd>{book.author}</TableTd>
-      <TableTd>{book.price}</TableTd>
+      <TableTd>
+        <NumberFormatter
+          value={book.price}
+          decimalScale={2}
+          thousandSeparator="."
+          decimalSeparator=","
+        />
+      </TableTd>
       <TableTd className="flex items-center gap-2">
-        <ActionIcon variant="subtle">
+        <ActionIcon
+          component={Link}
+          href={`/dashboard/book/edit/${book.id}`}
+          variant="subtle"
+        >
           <FaPencil size="0.8rem" />
         </ActionIcon>
         <ActionIcon variant="subtle">

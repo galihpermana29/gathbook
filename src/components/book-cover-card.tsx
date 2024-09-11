@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Paper, Skeleton, type PaperProps } from "@mantine/core";
 
 import { API_ENDPOINT } from "@/lib/constants";
+import { cn } from "@/lib/utils/cn";
 
 export interface BookCoverCardProps extends PaperProps {
   coverUrl: string;
@@ -13,10 +14,13 @@ export interface BookCoverCardProps extends PaperProps {
 export const BookCoverCard = React.forwardRef<
   HTMLDivElement,
   BookCoverCardProps
->(({ coverUrl, alt, ...props }, ref) => (
+>(({ coverUrl, alt, className, ...props }, ref) => (
   <Paper
     ref={ref}
-    className="relative aspect-[4/5] h-96 w-auto overflow-hidden"
+    className={cn(
+      "relative aspect-[4/5] h-96 w-auto overflow-hidden",
+      className,
+    )}
     shadow="sm"
     withBorder
     {...props}
@@ -24,7 +28,7 @@ export const BookCoverCard = React.forwardRef<
     <Image
       className="absolute z-10 object-cover"
       src={`${API_ENDPOINT}/image/${coverUrl}`}
-      alt={alt ?? "book cover"}
+      alt={alt ?? "Book Cover"}
       fill
     />
     <Skeleton className="absolute z-0 size-full" />
