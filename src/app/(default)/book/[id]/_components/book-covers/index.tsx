@@ -16,7 +16,7 @@ export const BookCovers = ({
         title={title}
         covers={covers}
       />
-      <div className="flex items-center justify-evenly gap-4 lg:hidden">
+      <div className="flex items-center justify-evenly gap-4 pb-3 lg:hidden">
         {covers.map((cover) => (
           <BookCoverCard
             key={cover}

@@ -8,6 +8,7 @@ import { BooksTable } from "./_components/books-table";
 import { BooksTablePagination } from "./_components/books-table/books-table-pagination";
 import { TableSearch } from "./_components/table-search";
 import { paginatedGetBooks } from "./_queries/paginated-get-books";
+import { LoadingTablePagination, LoadingTableSearch } from "./loading";
 
 type PageSearchParams = {
   limit: string | undefined;
@@ -25,6 +26,7 @@ export default function DashboardPage({
     limit: limit ? parseInt(limit) : undefined,
     search,
   });
+
   return (
     <div className="container flex w-full flex-col gap-4">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
@@ -35,7 +37,7 @@ export default function DashboardPage({
           Book Dashboard
         </Title>
         <div className="flex w-full items-center justify-end gap-2">
-          <Suspense>
+          <Suspense fallback={<LoadingTableSearch />}>
             <TableSearch />
           </Suspense>
           <ActionIcon
@@ -53,7 +55,7 @@ export default function DashboardPage({
           limit={limit}
           page={page}
         />
-        <Suspense>
+        <Suspense fallback={<LoadingTablePagination />}>
           <BooksTablePagination
             limit={limit}
             search={search}
