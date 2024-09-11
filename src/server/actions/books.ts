@@ -65,6 +65,8 @@ export const createBook = cache(async (payload: CreateBookPayload) => {
   }
 
   const { data }: CreateBookResponse = await res.json();
+  revalidatePath("/dashboard");
+  revalidatePath("/");
   return data;
 });
 
@@ -85,6 +87,9 @@ export const updateBook = cache(
     }
 
     const { data }: UpdateBookResponse = await res.json();
+    revalidatePath(`/book/${id}`, "page");
+    revalidatePath("/dashboard");
+    revalidatePath("/");
     return data;
   },
 );
@@ -105,6 +110,6 @@ export const buyBook = cache(async (id: Book["id"]) => {
   }
 
   const { data }: BuyBookResponse = await res.json();
-  revalidatePath(`/book/${id}`);
+  revalidatePath(`/book/${id}`, "page");
   return data;
 });
