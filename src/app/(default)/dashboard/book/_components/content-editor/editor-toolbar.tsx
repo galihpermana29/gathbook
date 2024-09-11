@@ -1,3 +1,5 @@
+"use client";
+
 import { RichTextEditor, RichTextEditorControlsGroup } from "@mantine/tiptap";
 
 export const EditorToolbar = () => {
