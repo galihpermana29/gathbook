@@ -1,8 +1,10 @@
 import { Suspense } from "react";
 import Link from "next/link";
 
-import { ActionIcon, Title } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { FaPlus } from "react-icons/fa";
+
+import { StyledTitle } from "@/components/styled-title";
 
 import { BooksTable } from "./_components/books-table";
 import { BooksTablePagination } from "./_components/books-table/books-table-pagination";
@@ -28,14 +30,14 @@ export default function DashboardPage({
   });
 
   return (
-    <div className="container flex w-full flex-col gap-4">
+    <div className="container flex w-full flex-col gap-4 py-4">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-        <Title
-          className="w-full"
+        <StyledTitle
+          className="w-full text-3xl lg:text-4xl"
           order={1}
         >
           Book Dashboard
-        </Title>
+        </StyledTitle>
         <div className="flex w-full items-center justify-end gap-2">
           <Suspense fallback={<LoadingTableSearch />}>
             <TableSearch />

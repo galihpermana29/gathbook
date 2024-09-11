@@ -1,5 +1,6 @@
 import { getBookById } from "@/server/actions/books";
-import { Title } from "@mantine/core";
+
+import { StyledTitle } from "@/components/styled-title";
 
 import { BookActionButton } from "./_components/book-action-button";
 import { BookCovers } from "./_components/book-covers";
@@ -42,40 +43,40 @@ export default async function BookDetailPage({ params }: PageProps) {
         <div className="container w-full py-12 lg:rounded-t-[3rem]">
           <div className="mx-auto grid grid-rows-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:max-w-[80ch] lg:gap-x-16">
             <div className="order-last flex flex-col gap-2 sm:order-first">
-              <Title
+              <StyledTitle
                 order={2}
                 className="text-2xl"
               >
                 Table of Contents
-              </Title>
+              </StyledTitle>
               <BookTOC topics={book.topics} />
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <Title
+                <StyledTitle
                   order={2}
                   className="text-2xl"
                 >
                   Book Synopsis
-                </Title>
+                </StyledTitle>
                 {book.synopsis}
               </div>
               <div className="flex flex-col gap-2">
-                <Title
+                <StyledTitle
                   order={2}
                   className="text-2xl"
                 >
                   Author of The Book
-                </Title>
+                </StyledTitle>
                 {book.author}
               </div>
               <div className="flex flex-col gap-2">
-                <Title
+                <StyledTitle
                   order={2}
                   className="text-2xl"
                 >
                   Book Price
-                </Title>
+                </StyledTitle>
                 {book.price}
               </div>
             </div>

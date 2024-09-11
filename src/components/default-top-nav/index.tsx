@@ -6,6 +6,7 @@ import { getServerSession } from "@/lib/utils/session";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+import { LogoCompact } from "../logo-compact";
 import { ConnectWalletButton } from "./connect-wallet-button";
 import { DashboardButton } from "./dashboard-button";
 import { LogOutButton } from "./log-out-button";
@@ -14,8 +15,17 @@ export const DefaultTopNav = async () => {
   const session = await getServerSession();
   return (
     <header className="container sticky top-0 z-50 flex w-full items-center justify-between gap-4 py-4 backdrop-blur-sm">
-      <Link href="/">
+      <Link
+        className="hidden sm:block"
+        href="/"
+      >
         <Logo />
+      </Link>
+      <Link
+        className="sm:hidden"
+        href="/"
+      >
+        <LogoCompact />
       </Link>
       <div className="flex items-center gap-4">
         <Suspense>

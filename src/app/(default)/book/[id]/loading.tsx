@@ -1,5 +1,7 @@
-import { ActionIcon, Button, Skeleton, Title } from "@mantine/core";
+import { ActionIcon, Button, Skeleton } from "@mantine/core";
 import { FaArrowDown, FaArrowUp, FaMoneyBill } from "react-icons/fa";
+
+import { StyledTitle } from "@/components/styled-title";
 
 export default function LoadingBookDetailPage() {
   return (
@@ -54,12 +56,12 @@ export default function LoadingBookDetailPage() {
         <div className="container w-full py-12 lg:rounded-t-[3rem]">
           <div className="mx-auto grid grid-rows-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:max-w-[80ch] lg:gap-x-16">
             <div className="order-last flex flex-col gap-2 sm:order-first">
-              <Title
+              <StyledTitle
                 order={2}
                 className="text-2xl"
               >
                 Table of Contents
-              </Title>
+              </StyledTitle>
               {Array.from({ length: 5 }).map((_, index) => (
                 <Skeleton
                   key={index}
@@ -69,30 +71,30 @@ export default function LoadingBookDetailPage() {
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <Title
+                <StyledTitle
                   order={2}
                   className="text-2xl"
                 >
                   Book Synopsis
-                </Title>
+                </StyledTitle>
                 <Skeleton className="h-7 w-full" />
               </div>
               <div className="flex flex-col gap-2">
-                <Title
+                <StyledTitle
                   order={2}
                   className="text-2xl"
                 >
                   Author of The Book
-                </Title>
+                </StyledTitle>
                 <Skeleton className="h-7 w-full" />
               </div>
               <div className="flex flex-col gap-2">
-                <Title
+                <StyledTitle
                   order={2}
                   className="text-2xl"
                 >
                   Book Price
-                </Title>
+                </StyledTitle>
                 <Skeleton className="h-7 w-full" />
               </div>
             </div>

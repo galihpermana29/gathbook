@@ -11,25 +11,25 @@ import {
   TableTh,
   TableThead,
   TableTr,
-  Title,
 } from "@mantine/core";
 import { FaPlus, FaSearch } from "react-icons/fa";
 
 import { booksTableColumn } from "@/lib/constants";
 import { CustomTableLoading } from "@/components/custom-table";
+import { StyledTitle } from "@/components/styled-title";
 import { NextPageButton } from "@/components/table-pagination/next-page-button";
 import { PreviousPageButton } from "@/components/table-pagination/previous-page-button";
 
 export default function LoadingDashboard() {
   return (
-    <div className="container flex w-full flex-col gap-4">
+    <div className="container flex w-full flex-col gap-4 py-4">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-        <Title
-          className="w-full"
+        <StyledTitle
+          className="w-full text-3xl lg:text-4xl"
           order={1}
         >
           Book Dashboard
-        </Title>
+        </StyledTitle>
         <div className="flex w-full items-center justify-end gap-2">
           <LoadingTableSearch />
           <ActionIcon

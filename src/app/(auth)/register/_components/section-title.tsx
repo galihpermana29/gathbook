@@ -1,12 +1,12 @@
-import { Title } from "@mantine/core";
+import { StyledTitle } from "@/components/styled-title";
 
 export const SectionTitle = () => {
   return (
-    <Title
+    <StyledTitle
       order={1}
-      className="text-6xl font-bold tracking-tighter"
+      className="text-3xl font-bold tracking-tighter xs:text-4xl"
     >
       REGISTER
-    </Title>
+    </StyledTitle>
   );
 };

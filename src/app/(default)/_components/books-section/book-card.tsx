@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { Title } from "@mantine/core";
 import * as motion from "framer-motion/client";
 
 import type { Book } from "@/lib/types/books";
 import { BookCoverCard } from "@/components/book-cover-card";
+import { StyledTitle } from "@/components/styled-title";
 
 export const BookCard = ({
   id,
@@ -31,12 +31,12 @@ export const BookCard = ({
         />
       </Link>
       <div className="flex flex-col gap-1">
-        <Title
+        <StyledTitle
           order={4}
           className="line-clamp-2 px-4 text-center text-xl"
         >
           {title}
-        </Title>
+        </StyledTitle>
         <p className="text-center">{author}</p>
       </div>
     </motion.div>

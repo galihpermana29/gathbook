@@ -1,6 +1,5 @@
-import { Title } from "@mantine/core";
-
 import type { Book } from "@/lib/types/books";
+import { StyledTitle } from "@/components/styled-title";
 
 export const BookSummary = ({
   title,
@@ -14,22 +13,17 @@ export const BookSummary = ({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <Title
+        <StyledTitle
           order={1}
-          className="text-pretty text-4xl"
+          className="text-balance text-3xl"
         >
           {title}
-        </Title>
+        </StyledTitle>
         <p className="text-md">
           <span className="font-semibold">Authored by</span> {author}
         </p>
       </div>
-      <i className="text-justify lg:text-left">
-        {synopsis} Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Laboriosam necessitatibus quam maiores recusandae nam voluptatum porro
-        ipsa tempora, obcaecati, ex accusamus harum neque quos iste nostrum
-        nobis, quod culpa repudiandae.
-      </i>
+      <i className="text-pretty text-justify lg:text-left">{synopsis}</i>
     </div>
   );
 };
