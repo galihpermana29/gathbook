@@ -35,44 +35,46 @@ export default async function BookDetailPage({ params }: PageProps) {
           />
         </div>
       </div>
-      <div className="container w-full rounded-t-3xl bg-mtn-primary-light py-8 lg:rounded-t-[3rem]">
-        <div className="mx-auto grid grid-rows-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:max-w-[80ch] lg:gap-x-16">
-          <div className="order-last flex flex-col gap-2 sm:order-first">
-            <Title
-              order={2}
-              className="text-2xl"
-            >
-              Table of Contents
-            </Title>
-            <BookTOC topics={book.topics} />
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+      <div className="rounded-t-3xl bg-mtn-primary-light">
+        <div className="container w-full py-12 lg:rounded-t-[3rem]">
+          <div className="mx-auto grid grid-rows-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:max-w-[80ch] lg:gap-x-16">
+            <div className="order-last flex flex-col gap-2 sm:order-first">
               <Title
                 order={2}
                 className="text-2xl"
               >
-                Book Synopsis
+                Table of Contents
               </Title>
-              {book.synopsis}
+              <BookTOC topics={book.topics} />
             </div>
-            <div className="flex flex-col gap-2">
-              <Title
-                order={2}
-                className="text-2xl"
-              >
-                Author of The Book
-              </Title>
-              {book.author}
-            </div>
-            <div className="flex flex-col gap-2">
-              <Title
-                order={2}
-                className="text-2xl"
-              >
-                Book Price
-              </Title>
-              {book.price}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <Title
+                  order={2}
+                  className="text-2xl"
+                >
+                  Book Synopsis
+                </Title>
+                {book.synopsis}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Title
+                  order={2}
+                  className="text-2xl"
+                >
+                  Author of The Book
+                </Title>
+                {book.author}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Title
+                  order={2}
+                  className="text-2xl"
+                >
+                  Book Price
+                </Title>
+                {book.price}
+              </div>
             </div>
           </div>
         </div>

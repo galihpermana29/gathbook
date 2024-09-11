@@ -50,44 +50,46 @@ export default function LoadingBookDetailPage() {
           </Button>
         </div>
       </div>
-      <div className="container w-full rounded-t-3xl bg-mtn-primary-light py-8 lg:rounded-t-[3rem]">
-        <div className="mx-auto grid grid-rows-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:max-w-[80ch] lg:gap-x-16">
-          <div className="order-last flex flex-col gap-2 sm:order-first">
-            <Title
-              order={2}
-              className="text-2xl"
-            >
-              Table of Contents
-            </Title>
-            <Skeleton className="h-60 w-full" />
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+      <div className="rounded-t-3xl bg-mtn-primary-light">
+        <div className="container w-full py-12 lg:rounded-t-[3rem]">
+          <div className="mx-auto grid grid-rows-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:max-w-[80ch] lg:gap-x-16">
+            <div className="order-last flex flex-col gap-2 sm:order-first">
               <Title
                 order={2}
                 className="text-2xl"
               >
-                Book Synopsis
+                Table of Contents
               </Title>
-              <Skeleton className="h-36 w-full" />
+              <Skeleton className="h-60 w-full" />
             </div>
-            <div className="flex flex-col gap-2">
-              <Title
-                order={2}
-                className="text-2xl"
-              >
-                Author of The Book
-              </Title>
-              <Skeleton className="h-8 w-full" />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Title
-                order={2}
-                className="text-2xl"
-              >
-                Book Price
-              </Title>
-              <Skeleton className="h-8 w-full" />
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <Title
+                  order={2}
+                  className="text-2xl"
+                >
+                  Book Synopsis
+                </Title>
+                <Skeleton className="h-36 w-full" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Title
+                  order={2}
+                  className="text-2xl"
+                >
+                  Author of The Book
+                </Title>
+                <Skeleton className="h-8 w-full" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Title
+                  order={2}
+                  className="text-2xl"
+                >
+                  Book Price
+                </Title>
+                <Skeleton className="h-8 w-full" />
+              </div>
             </div>
           </div>
         </div>

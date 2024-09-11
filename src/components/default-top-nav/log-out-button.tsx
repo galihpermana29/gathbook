@@ -5,13 +5,13 @@ import { FaSignOutAlt } from "react-icons/fa";
 
 import { clearServerSession } from "@/lib/utils/session";
 
-export const LogOutButton = () => {
-  const logOut = async () => {
-    "use server";
-    await clearServerSession();
-    return redirect("/login");
-  };
+const logOut = async () => {
+  "use server";
+  await clearServerSession();
+  return redirect("/login");
+};
 
+export const LogOutButton = () => {
   return (
     <form action={logOut}>
       <ActionIcon

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { DefaultFooter } from "./_components/default-footer";
-import { DefaultTopNav } from "./_components/default-top-nav";
+import { DefaultFooter } from "@/components/default-footer";
+import { DefaultTopNav } from "@/components/default-top-nav";
 
 export default function DefaultLayout({
   children,
