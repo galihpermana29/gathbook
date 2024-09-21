@@ -1,0 +1,14 @@
+.item {
+  background-color: var(--mantine-color-light);
+  border-color: var(--mantine-color-dark-3);
+}
+
+.control {
+  padding: 0 1rem;
+  background-color: var(--mantine-color-light);
+  border-color: var(--mantine-color-dark-3);
+
+  &:hover {
+    background-color: var(--mantine-color-light-hover);
+  }
+}
