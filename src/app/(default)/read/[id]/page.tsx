@@ -16,7 +16,7 @@ export default async function ReadBookPage({ params }: PageProps) {
   return (
     <div className="relative flex w-full flex-col gap-32">
       <div className="absolute left-7 hidden h-full w-[0.15rem] rounded-lg bg-mtn-dark-3 lg:block" />
-      
+
       {book.topics.map((item, idx) => (
         <ReadPageContainer
           item={item}

@@ -1,6 +1,14 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 import { StyledTitle } from "@/components/styled-title";
 
@@ -22,42 +30,73 @@ export interface AccordionComponentProps {
 }
 
 const ReadPageContainer = ({ item }: AccordionComponentProps) => {
-  const { containerRef, titleVariants, chaptersVariants } = useReadBook();
+  const { containerRef } = useReadBook();
+  const ref1 = useRef(null);
+
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
+    target: ref1,
+    offset: ["center center", "start start"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
+  const { scrollYProgress: scroller } = useScroll({
+    target: ref1,
+    offset: ["start start", "end end"],
+  });
+
+  const xLeft = useTransform(
+    scrollYProgress,
+    [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    [
+      "0vw",
+      "20vw",
+      "30vw",
+      "40vw",
+      "50vw",
+      "60vw",
+      "70vw",
+      "80vw",
+      "90vw",
+      "100vw",
+    ],
+  );
+
+  const yRange = useSpring(0, { damping: 100 });
+
+  useMotionValueEvent(scroller, "change", (latest) => {
+    const containerHeight =
+      containerRef.current?.getBoundingClientRect().height || 0;
+    const viewportHeight = window.innerHeight;
+    const maxY = containerHeight - viewportHeight;
+    yRange.set(latest * maxY * -1 + 82);
+  });
+
   return (
-    <div className="flex w-full flex-col gap-8">
-      <div
-        ref={containerRef}
-        className="relative h-[calc(100vh-300px)] flex flex-col items-center justify-center gap-2 px-3"
-      >
+    <div
+      className="flex w-full flex-col gap-8"
+      ref={ref1}
+    >
+      <div className="relative flex h-[calc(100vh)] flex-col items-center justify-center gap-2 px-3">
         <motion.div
-          style={{ x }}
-          className="absolute left-3 top-0 hidden w-fit rounded-lg bg-mtn-primary-filled p-1 text-lg font-semibold text-white lg:block"
+          className="absolute left-3 top-[80px] hidden w-fit rounded-lg bg-mtn-primary-filled p-1 text-lg font-semibold text-white lg:block"
+          transition={{ ease: "easeInOut" }}
+          style={{ y: yRange }}
         >
           {item.title}
         </motion.div>
+
         <motion.div
-          variants={titleVariants}
-          initial="initial"
-          animate="animate"
-          className="w-full"
-          transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
+          style={{ x: xLeft }}
+          className="relative w-full translate-x-[100vw]"
+          transition={{ ease: "easeInOut" }}
         >
           <StyledTitle className="text-balance text-center text-4xl md:text-6xl lg:text-8xl">
             {item.title}
           </StyledTitle>
         </motion.div>
         <motion.i
-          variants={chaptersVariants}
-          initial="initial"
-          animate="animate"
-          className="text-pretty text-justify lg:text-left"
-          transition={{ type: "tween", ease: "easeOut", duration: 0.5 }}
+          style={{ x: xLeft }}
+          className="relative translate-x-[100vw] text-pretty text-justify lg:text-left"
+          transition={{ ease: "easeOut", duration: 0.5 }}
         >
           {`${item.subTopics.length} chapters`}
         </motion.i>

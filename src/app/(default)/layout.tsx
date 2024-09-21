@@ -9,7 +9,7 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="no-scrollbar flex h-dvh flex-col overflow-y-scroll">
+    <div className="no-scrollbar flex h-dvh flex-col">
       <Suspense>
         <DefaultTopNav />
       </Suspense>

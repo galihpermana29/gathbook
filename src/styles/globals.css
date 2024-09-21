@@ -43,43 +43,41 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
+/* @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /
+    scrollbar-width: none; 
   }
-}
+} */
 
 /* Scrollbar styles */
 /* Hide scrollbar on mobile */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   ::-webkit-scrollbar {
     display: none;
   }
-}
+} */
 
 /* Width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 0.75rem;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: var(--mantine-color-body);
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: var(--mantine-primary-color-filled);
   border-radius: 2rem;
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background: var(--mantine-primary-color-filled-hover);
-}
+} */
