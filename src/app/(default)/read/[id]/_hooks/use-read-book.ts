@@ -1,43 +1,63 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+
+import {
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 export const useReadBook = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const ref1 = useRef(null);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const { scrollYProgress } = useScroll({
+    target: ref1,
+    offset: ["0 1", "1.33 1"],
+  });
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          const progress = 1 - entry.intersectionRatio;
-          setScrollProgress(progress);
-        }
-      },
-      {
-        root: null,
-        threshold: new Array(101).fill(0).map((_, i) => i / 100),
-      },
-    );
+  const { scrollYProgress: scroller } = useScroll({
+    target: ref1,
+    offset: ["start start", "end end"],
+  });
 
-    observer.observe(container);
+  const xLeftSpring = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
-    return () => observer.disconnect();
-  }, []);
+  const xLeft = useTransform(
+    xLeftSpring,
+    [0, 0.5, 1],
+    ["70vw", "0vw", "-40vw"],
+  );
 
-  const titleVariants = {
-    initial: { x: 0 },
-    animate: { x: `${scrollProgress * 100}%` },
-  };
+  const opacityTitle = useTransform(
+    xLeftSpring,
+    [0, 0.2, 0.8, 1],
+    [0, 1, 1, 0],
+  );
 
-  const chaptersVariants = {
-    initial: { x: 0 },
-    animate: { x: `${scrollProgress * 100}%` },
-  };
+  const yRange = useSpring(0, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  useMotionValueEvent(scroller, "change", (latest) => {
+    const containerHeight =
+      containerRef.current?.getBoundingClientRect().height || 0;
+    const viewportHeight = window.innerHeight;
+    const maxY = containerHeight - viewportHeight;
+    yRange.set(latest * maxY * -1 + 82);
+  });
+
   return {
     containerRef,
-    titleVariants,
-    chaptersVariants,
+    ref1,
+    yRange,
+    xLeft,
+    opacityTitle,
   };
 };
