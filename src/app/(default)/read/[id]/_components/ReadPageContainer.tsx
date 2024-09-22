@@ -1,14 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 import { StyledTitle } from "@/components/styled-title";
 
@@ -30,73 +22,35 @@ export interface AccordionComponentProps {
 }
 
 const ReadPageContainer = ({ item }: AccordionComponentProps) => {
-  const { containerRef } = useReadBook();
-  const ref1 = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref1,
-    offset: ["center center", "start start"],
-  });
-
-  const { scrollYProgress: scroller } = useScroll({
-    target: ref1,
-    offset: ["start start", "end end"],
-  });
-
-  const xLeft = useTransform(
-    scrollYProgress,
-    [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-    [
-      "0vw",
-      "20vw",
-      "30vw",
-      "40vw",
-      "50vw",
-      "60vw",
-      "70vw",
-      "80vw",
-      "90vw",
-      "100vw",
-    ],
-  );
-
-  const yRange = useSpring(0, { damping: 100 });
-
-  useMotionValueEvent(scroller, "change", (latest) => {
-    const containerHeight =
-      containerRef.current?.getBoundingClientRect().height || 0;
-    const viewportHeight = window.innerHeight;
-    const maxY = containerHeight - viewportHeight;
-    yRange.set(latest * maxY * -1 + 82);
-  });
+  const { ref1, yRange, xLeft, opacityTitle } = useReadBook();
 
   return (
     <div
-      className="flex w-full flex-col gap-8"
+      className="relative flex w-full flex-col gap-8"
       ref={ref1}
     >
-      <div className="relative flex h-[calc(100vh)] flex-col items-center justify-center gap-2 px-3">
+      <div className="flex h-[calc(100vh)] flex-col items-center justify-center gap-2 overflow-x-hidden px-3">
         <motion.div
-          className="absolute left-3 top-[80px] hidden w-fit rounded-lg bg-mtn-primary-filled p-1 text-lg font-semibold text-white lg:block"
-          transition={{ ease: "easeInOut" }}
+          className="absolute left-3 top-[80px] z-10 hidden w-fit rounded-lg bg-mtn-primary-filled p-1 text-3xl text-lg font-bold text-white lg:block"
+          transition={{ ease: "easeInOut", duration: 0.5 }}
           style={{ y: yRange }}
         >
           {item.title}
         </motion.div>
 
         <motion.div
-          style={{ x: xLeft }}
-          className="relative w-full translate-x-[100vw]"
-          transition={{ ease: "easeInOut" }}
+          style={{ x: xLeft, opacity: opacityTitle }}
+          className="relative w-full"
+          transition={{ ease: [0.16, 1, 0.3, 1], duration: 1 }}
         >
-          <StyledTitle className="text-balance text-center text-4xl md:text-6xl lg:text-8xl">
+          <StyledTitle className="text-balance text-center text-[3rem] md:text-[5rem] lg:text-[7rem] xl:text-[9rem]">
             {item.title}
           </StyledTitle>
         </motion.div>
         <motion.i
-          style={{ x: xLeft }}
-          className="relative translate-x-[100vw] text-pretty text-justify lg:text-left"
-          transition={{ ease: "easeOut", duration: 0.5 }}
+          style={{ x: xLeft, opacity: opacityTitle }}
+          className="relative text-pretty text-justify lg:text-left"
+          transition={{ ease: [0.16, 1, 0.3, 1], duration: 1, delay: 0.1 }}
         >
           {`${item.subTopics.length} chapters`}
         </motion.i>
