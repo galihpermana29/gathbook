@@ -1,22 +1,50 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
-import { createBook } from "@/server/actions/books";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
-
 import type { CreateBookPayload } from "@/lib/types/books";
+import { createBook as createBookOfChain } from "@/server/actions/books";
+import { createBook as createBookOnChain, getAccount } from "@/server/actions/contract";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const useCreateBook = () => {
   const router = useRouter();
+  
   return useMutation({
     mutationKey: ["create-book"],
-    mutationFn: (payload: CreateBookPayload) => createBook(payload),
-    onError: ({ message }) => toast.error(message),
+    mutationFn: async (payload: CreateBookPayload) => {
+      const account = await getAccount();
+      if (!account) {
+        toast.error("Please connect wallet to create book!");
+        throw new Error("Account is null");
+      }
+      try {
+        const data = await Promise.all([
+          createBookOnChain(
+            payload.title,
+            payload.author,
+            payload.address, 
+            payload.supply,
+            payload.price,
+            payload.inor,
+            payload.renor,
+            account
+          ),
+          createBookOfChain(payload), 
+        ]);
+        return data;
+      } catch (error) {
+        toast.error("Failed to create book. Please try again.");
+        throw error; 
+      }
+    },
+    onError: (error) => {
+      const errorMessage = error instanceof Error ? error.message : "Failed to create book. Please try again.";
+      toast.error(errorMessage);
+    },
     onSuccess: (data) => {
       toast.success("Successfully created a new book!");
-      router.push(`/book/${data}`);
+      router.push(`/book/${data}`); 
     },
   });
 };

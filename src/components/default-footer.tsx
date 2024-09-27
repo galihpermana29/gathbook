@@ -1,20 +1,21 @@
 import Link from "next/link";
 
 import { ActionIcon, Divider } from "@mantine/core";
-import { FaFacebook, FaTiktok, FaYoutube } from "react-icons/fa";
+import { FaTelegram, FaYoutube } from "react-icons/fa";
 
+import { FaX } from "react-icons/fa6";
 import { Logo } from "./logo";
 
 const socialMedias = [
   {
-    label: "TikTok",
-    link: "https://tiktok.com",
-    icon: <FaTiktok size="0.75rem" />,
+    label: "Telegram",
+    link: "https://telegram.me/gathbook",
+    icon: <FaTelegram size="0.75rem" />,
   },
   {
-    label: "Facebook",
-    link: "https://facebook.com",
-    icon: <FaFacebook size="0.75rem" />,
+    label: "X",
+    link: "https://x.com/gathbook",
+    icon: <FaX size="0.75rem" />,
   },
   {
     label: "YouTube",

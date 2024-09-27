@@ -23,6 +23,17 @@ export const BookSchema = z.object({
   id: z.number(),
   title: z.string(),
   author: z.string(),
+  address: z.string(),
+  supply: z.number()
+  .min(0, { message: "Supply is required and has to be positive!"}),
+  inor: z
+  .number()
+  .min(0, { message: "Initial Royalty must in range 0-100"})
+  .max(100, { message: "Initial Royalty must in range 0-100 "}),
+  renor: z
+  .number()
+  .min(0, { message: "Resale Royalty must in range 0-100"})
+  .max(100, { message: "Resale Royalty must in range 0-100 "}),
   synopsis: z.string(),
   cover: z.array(z.string()),
   price: z

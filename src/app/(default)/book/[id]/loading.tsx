@@ -1,5 +1,5 @@
 import { ActionIcon, Button, Skeleton } from "@mantine/core";
-import { FaArrowDown, FaArrowUp, FaMoneyBill } from "react-icons/fa";
+import { FaArrowDown, FaArrowUp, FaSpinner } from "react-icons/fa";
 
 import { StyledTitle } from "@/components/styled-title";
 
@@ -44,12 +44,11 @@ export default function LoadingBookDetailPage() {
             </div>
             <Skeleton className="h-48 w-full" />
           </div>
-          <Button
-            disabled
-            leftSection={<FaMoneyBill />}
-          >
-            Buy Book
-          </Button>
+            <Button
+              disabled
+              leftSection={<FaSpinner />}
+            >
+            </Button>
         </div>
       </div>
       <div className="rounded-t-3xl bg-mtn-primary-light">
@@ -75,16 +74,7 @@ export default function LoadingBookDetailPage() {
                   order={2}
                   className="text-2xl"
                 >
-                  Book Synopsis
-                </StyledTitle>
-                <Skeleton className="h-7 w-full" />
-              </div>
-              <div className="flex flex-col gap-2">
-                <StyledTitle
-                  order={2}
-                  className="text-2xl"
-                >
-                  Author of The Book
+                  Total Supply
                 </StyledTitle>
                 <Skeleton className="h-7 w-full" />
               </div>
@@ -94,6 +84,24 @@ export default function LoadingBookDetailPage() {
                   className="text-2xl"
                 >
                   Book Price
+                </StyledTitle>
+                <Skeleton className="h-7 w-full" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <StyledTitle
+                  order={2}
+                  className="text-2xl"
+                >
+                  Unique Owners
+                </StyledTitle>
+                <Skeleton className="h-7 w-full" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <StyledTitle
+                  order={2}
+                  className="text-2xl"
+                >
+                  Actual Readers
                 </StyledTitle>
                 <Skeleton className="h-7 w-full" />
               </div>

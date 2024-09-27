@@ -22,15 +22,50 @@ export const CreateBookForm = ({
         key={form.key("author")}
         {...form.getInputProps("author")}
       />
+      <TextInput
+        label="Author Address"
+        placeholder="Enter author address here..."
+        key={form.key("adrress")}
+        {...form.getInputProps("adrress")}
+      />
+      <NumberInput
+        label="Total Supply"
+        placeholder="Enter book's supply here..."
+        thousandSeparator="."
+        decimalSeparator=","
+        min={0}
+        key={form.key("supply")}
+        {...form.getInputProps("supply")}
+      />
       <NumberInput
         label="Price"
-        prefix="Rp."
+        prefix="BTT."
         placeholder="Enter book's price here..."
         thousandSeparator="."
         decimalSeparator=","
         min={0}
         key={form.key("price")}
         {...form.getInputProps("price")}
+      />
+      <NumberInput
+        label="Initial Royalty"
+        placeholder="1-100%..."
+        thousandSeparator="."
+        decimalSeparator=","
+        min={0}
+        max={100}
+        key={form.key("inor")}
+        {...form.getInputProps("inor")}
+      />
+      <NumberInput
+        label="Resale Royalty"
+        placeholder="1-100%..."
+        thousandSeparator="."
+        decimalSeparator=","
+        min={0}
+        max={100}
+        key={form.key("renor")}
+        {...form.getInputProps("renor")}
       />
       <Textarea
         label="Synopsis"

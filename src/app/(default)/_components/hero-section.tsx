@@ -1,5 +1,5 @@
-import { getServerSession } from "@/lib/utils/session";
 import { StyledTitle } from "@/components/styled-title";
+import { getServerSession } from "@/lib/utils/session";
 
 export const HeroSection = async () => {
   const user = await getServerSession();

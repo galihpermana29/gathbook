@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import * as motion from "framer-motion/client";
 
-import type { Book } from "@/lib/types/books";
 import { BookCoverCard } from "@/components/book-cover-card";
 import { StyledTitle } from "@/components/styled-title";
+import type { Book } from "@/lib/types/books";
 
 export const BookCard = ({
   id,

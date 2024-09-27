@@ -108,7 +108,7 @@ export default function LoadingDashboardCreateBook() {
             />
             <NumberInput
               label="Price"
-              prefix="Rp."
+              prefix="BTT."
               placeholder="Enter book's price here..."
               thousandSeparator="."
               decimalSeparator=","

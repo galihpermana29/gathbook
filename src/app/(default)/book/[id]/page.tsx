@@ -1,11 +1,13 @@
 import { getBookById } from "@/server/actions/books";
 
 import { StyledTitle } from "@/components/styled-title";
-
 import { BookActionButton } from "./_components/book-action-button";
 import { BookCovers } from "./_components/book-covers";
 import { BookSummary } from "./_components/book-summary";
 import { BookTOC } from "./_components/book-toc";
+import { ActualReader } from "./_utils/get-actual-readers";
+import { TotalSupply } from "./_utils/get-total-supply";
+import { UniqueOwners } from "./_utils/get-unique-owners";
 import { isBookBought } from "./_utils/is-book-bought";
 
 type PageProps = {
@@ -20,6 +22,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function BookDetailPage({ params }: PageProps) {
   const book = await getBookById(params.id);
   const bookIsBought = await isBookBought(book.buyers);
+  
   return (
     <div className="flex w-full flex-col justify-between gap-16">
       <div className="mx-auto flex w-full max-w-[80ch] flex-grow flex-col items-center justify-center gap-12 pt-4 lg:max-w-[100ch] lg:flex-row lg:gap-8 lg:px-16">
@@ -35,7 +38,7 @@ export default async function BookDetailPage({ params }: PageProps) {
           />
           <BookActionButton
             id={params.id}
-            isBought={bookIsBought}
+            isBought={bookIsBought} 
           />
         </div>
       </div>
@@ -57,27 +60,36 @@ export default async function BookDetailPage({ params }: PageProps) {
                   order={2}
                   className="text-2xl"
                 >
-                  Book Synopsis
-                </StyledTitle>
-                {book.synopsis}
-              </div>
-              <div className="flex flex-col gap-2">
-                <StyledTitle
-                  order={2}
-                  className="text-2xl"
-                >
-                  Author of The Book
-                </StyledTitle>
-                {book.author}
-              </div>
-              <div className="flex flex-col gap-2">
-                <StyledTitle
-                  order={2}
-                  className="text-2xl"
-                >
                   Book Price
                 </StyledTitle>
-                {book.price}
+                {book.price} BTT
+              </div>
+              <div className="flex flex-col gap-2">
+                <StyledTitle
+                  order={2}
+                  className="text-2xl"
+                >
+                  Total Supply
+                </StyledTitle>
+                <TotalSupply bookId={params.id} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <StyledTitle
+                  order={2}
+                  className="text-2xl"
+                >
+                  Unique Owners
+                </StyledTitle>
+                <UniqueOwners bookId={params.id} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <StyledTitle
+                  order={2}
+                  className="text-2xl"
+                >
+                  Actual Readers
+                </StyledTitle>
+                <ActualReader bookId={params.id}/>
               </div>
             </div>
           </div>

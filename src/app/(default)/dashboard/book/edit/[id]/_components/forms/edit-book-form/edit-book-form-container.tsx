@@ -5,15 +5,15 @@ import Link from "next/link";
 import { Button, ButtonGroup } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 
+import { ContentEditor } from "@/app/(default)/dashboard/book/_components/content-editor";
+import { CoverField } from "@/app/(default)/dashboard/book/_components/cover-field";
+import { StyledTitle } from "@/components/styled-title";
 import {
   UpdateBookPayloadSchema,
   type Book,
   type GetBookByIdResponse,
   type UpdateBookPayload,
 } from "@/lib/types/books";
-import { StyledTitle } from "@/components/styled-title";
-import { ContentEditor } from "@/app/(default)/dashboard/book/_components/content-editor";
-import { CoverField } from "@/app/(default)/dashboard/book/_components/cover-field";
 
 import { EditBookForm } from ".";
 import { useEditBook } from "../../../_hooks/use-edit-book";
@@ -32,6 +32,10 @@ export const EditBookFormContainer = ({
     validateInputOnChange: true,
     initialValues: {
       author: initials?.author ?? "",
+      address: initials?.address ?? "",
+      inor: initials?.inor ?? "",
+      renor: initials?.renor ?? "",
+      supply: initials?.supply ?? "",
       cover: initials?.cover ?? [],
       price: Number(initials?.price ?? 0),
       synopsis: initials?.synopsis ?? "",

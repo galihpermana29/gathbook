@@ -15,22 +15,25 @@ export const EditBookForm = ({
         placeholder="Enter book title here..."
         key={form.key("title")}
         {...form.getInputProps("title")}
+        disabled
       />
       <TextInput
         label="Author"
         placeholder="Enter book's author here..."
         key={form.key("author")}
         {...form.getInputProps("author")}
+        disabled
       />
       <NumberInput
         label="Price"
-        prefix="Rp."
+        prefix="BTT."
         placeholder="Enter book's price here..."
         thousandSeparator="."
         decimalSeparator=","
         min={0}
         key={form.key("price")}
         {...form.getInputProps("price")}
+        disabled
       />
       <Textarea
         label="Synopsis"

@@ -1,12 +1,13 @@
-import { Suspense } from "react";
 import Link from "next/link";
+import { Suspense } from "react";
 
-import type { User } from "@/lib/types/user";
-import { getServerSession } from "@/lib/utils/session";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import type { User } from "@/lib/types/user";
+import { getServerSession } from "@/lib/utils/session";
 
 import { LogoCompact } from "../logo-compact";
+import { Collections } from "./collections";
 import { ConnectWalletButton } from "./connect-wallet-button";
 import { DashboardButton } from "./dashboard-button";
 import { LogOutButton } from "./log-out-button";
@@ -15,17 +16,11 @@ export const DefaultTopNav = async () => {
   const session = await getServerSession();
   return (
     <header className="container sticky top-0 z-50 flex w-full items-center justify-between gap-4 py-4 backdrop-blur-sm">
-      <Link
-        className="hidden sm:block"
-        href="/"
-      >
-        <Logo />
+      <Link className="hidden sm:block" href="/">
+      <Logo />
       </Link>
-      <Link
-        className="sm:hidden"
-        href="/"
-      >
-        <LogoCompact />
+      <Link className="sm:hidden" href="/">
+      <LogoCompact />
       </Link>
       <div className="flex items-center gap-4">
         <Suspense>
@@ -36,11 +31,13 @@ export const DefaultTopNav = async () => {
           <Suspense>
             <DashboardButton session={session} />
           </Suspense>
+          <Suspense>
+            <Link className="hidden sm:block" href="/collections">
+            <Collections />
+            </Link>
+          </Suspense>
           <LogOutButton />
-          <ThemeToggle
-            variant="light"
-            size="lg"
-          />
+          <ThemeToggle variant="light" size="lg" />
         </div>
       </div>
     </header>

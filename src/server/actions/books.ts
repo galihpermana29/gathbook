@@ -1,7 +1,7 @@
 "use server";
 
-import { cache } from "react";
 import { revalidatePath } from "next/cache";
+import { cache } from "react";
 
 import { API_ENDPOINT } from "@/lib/constants";
 import type {
@@ -53,7 +53,14 @@ export const getBookById = cache(async (id: Book["id"]) => {
 export const createBook = cache(async (payload: CreateBookPayload) => {
   const token = await getBearerToken();
   const headers = { Authorization: `Bearer ${token}` };
-  const body = { ...payload, price: payload.price.toString() };
+  const body = { 
+    title: payload.title, 
+    author: payload.author, 
+    synopsis: payload.synopsis, 
+    cover: payload.cover, 
+    topics: payload.topics, 
+    price: payload.price.toString() 
+  };
   const res = await fetch(`${API_ENDPOINT}/book`, {
     method: "POST",
     headers,
