@@ -39,7 +39,7 @@ export const BookActionButton = async ({
       setAccount(currentAccount);
     };
     fetchAccount();
-  }, []);
+  }, [id]);
 
   const { mutate: buyBook, isPending: isBuyingPending } = useBuyBook(id, account!, price); 
   const { mutate: cancelResell, isPending: isCancelingPending } = useCancelResell(id, account);
