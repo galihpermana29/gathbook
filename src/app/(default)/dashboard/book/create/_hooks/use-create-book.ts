@@ -21,6 +21,7 @@ export const useCreateBook = () => {
       try {
         const data = await Promise.all([
           createBookOnChain(
+            await createBookOfChain(payload),
             payload.title,
             payload.author,
             payload.address, 
@@ -29,8 +30,7 @@ export const useCreateBook = () => {
             payload.inor,
             payload.renor,
             account
-          ),
-          createBookOfChain(payload), 
+          )
         ]);
         return data;
       } catch (error) {

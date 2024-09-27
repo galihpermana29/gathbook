@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaWallet } from "react-icons/fa";
 import { toast } from "sonner";
+
 declare global {
   interface Window {
     ethereum?: any;

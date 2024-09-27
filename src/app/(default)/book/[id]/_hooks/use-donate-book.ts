@@ -1,4 +1,4 @@
-import { DonateNFT } from "@/server/actions/contract"; // Import fungsi dari contract.ts
+import { DonateNFT } from "@/server/actions/contract";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 

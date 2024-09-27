@@ -27,7 +27,7 @@ export const initWeb3 = async () => {
   }
   
   if (web3) {
-    gathbookContract = new web3.eth.Contract(abi, "0x20E3CF0D5694D337740d9F79cB7d49C1553AeC6d");
+    gathbookContract = new web3.eth.Contract(abi, "0x9B9ccfF7B3403F4272e3F7184Af5C1a58b4902e7");
     return { web3, gathbookContract }; 
   }
   return null; 
@@ -43,18 +43,11 @@ export const getAccount = async (): Promise<string | null> => {
 };
 
 export const createBook = async (
-  title: string,
-  author: string,
-  authorAddress: string,
-  totalSupply: number,
-  price: number,
-  initialRoyalty: number,
-  resaleRoyalty: number,
-  account: string
-) => {
+id: number, title: string, author: string, authorAddress: string, totalSupply: number, price: number, initialRoyalty: number, resaleRoyalty: number, account: string) => {
   if (gathbookContract) {
     const gasPrice = await web3?.eth.getGasPrice();
     return gathbookContract.methods.createBook(
+      id,
       title,
       author,
       authorAddress,
