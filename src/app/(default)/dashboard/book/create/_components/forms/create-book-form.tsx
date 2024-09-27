@@ -25,8 +25,8 @@ export const CreateBookForm = ({
       <TextInput
         label="Author Address"
         placeholder="Enter author address here..."
-        key={form.key("adrress")}
-        {...form.getInputProps("adrress")}
+        key={form.key("address")}
+        {...form.getInputProps("address")}
       />
       <NumberInput
         label="Total Supply"

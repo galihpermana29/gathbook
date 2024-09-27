@@ -42,9 +42,9 @@ export const useCreateBook = () => {
       const errorMessage = error instanceof Error ? error.message : "Failed to create book. Please try again.";
       toast.error(errorMessage);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Successfully created a new book!");
-      router.push(`/book/${data}`); 
+      router.push("/dashboard");
     },
   });
 };

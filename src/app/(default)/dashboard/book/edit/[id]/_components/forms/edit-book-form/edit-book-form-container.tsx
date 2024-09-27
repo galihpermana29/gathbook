@@ -33,9 +33,9 @@ export const EditBookFormContainer = ({
     initialValues: {
       author: initials?.author ?? "",
       address: initials?.address ?? "",
-      inor: initials?.inor ?? "",
-      renor: initials?.renor ?? "",
-      supply: initials?.supply ?? "",
+      inor: initials?.inor ?? 0,
+      renor: initials?.renor ?? 0,
+      supply: initials?.supply ?? 0,
       cover: initials?.cover ?? [],
       price: Number(initials?.price ?? 0),
       synopsis: initials?.synopsis ?? "",
