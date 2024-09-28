@@ -131,11 +131,11 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			}
 		],
-		"name": "buyNFT",
+		"name": "buyNFTBook",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -144,12 +144,12 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "owner",
+				"name": "_owner",
 				"type": "address"
 			}
 		],
@@ -162,7 +162,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			}
 		],
@@ -173,6 +173,11 @@
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
 			{
 				"internalType": "string",
 				"name": "name",
@@ -209,7 +214,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "createBook",
+		"name": "createNFTBook",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -218,16 +223,16 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "to",
+				"name": "_to",
 				"type": "address"
 			}
 		],
-		"name": "donateNFT",
+		"name": "donateNFTBook",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -400,12 +405,12 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "price",
+				"name": "_price",
 				"type": "uint256"
 			}
 		],
@@ -588,6 +593,30 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_bookId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			}
+		],
+		"name": "checkOwnership",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "tokenId",
 				"type": "uint256"
 			}
@@ -607,7 +636,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			}
 		],
@@ -631,12 +660,12 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "owner",
+				"name": "_owner",
 				"type": "address"
 			}
 		],
@@ -655,7 +684,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			}
 		],
@@ -674,7 +703,7 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "bookId",
+				"name": "_bookId",
 				"type": "uint256"
 			}
 		],
@@ -721,19 +750,6 @@
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "nextBookId",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

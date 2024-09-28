@@ -9,14 +9,15 @@ interface BuyFModalProps {
   onClose: () => void;
   bookId: number; 
   account: string; 
+  isBought: boolean
 }
 
-export const BuyFModal = ({ opened, onClose, bookId, account }: BuyFModalProps) => {
+export const BuyFModal = ({ opened, onClose, bookId, account, isBought }: BuyFModalProps) => {
   const [buyFrom, setBuyFrom] = useState("");
   const { mutate: buyFromFriend, isPending } = useBuyFromFriend(bookId, buyFrom, account, () => {
     setBuyFrom(""); 
     onClose(); 
-  });
+  }, isBought);
 
   const handleBuyF = () => {
     buyFromFriend(); 

@@ -4,6 +4,8 @@ import Web3 from 'web3';
 let web3: Web3 | null = null;
 let gathbookContract: any = null;
 
+let address_wallet: string | null = null;
+
 declare global {
   interface Window {
     ethereum?: any;
@@ -27,7 +29,7 @@ export const initWeb3 = async () => {
   }
   
   if (web3) {
-    gathbookContract = new web3.eth.Contract(abi, "0x9B9ccfF7B3403F4272e3F7184Af5C1a58b4902e7");
+    gathbookContract = new web3.eth.Contract(abi, "0xd7F05A879F01a6ab1659c0000C3cAbb769b1226A");
     return { web3, gathbookContract }; 
   }
   return null; 
@@ -36,7 +38,7 @@ export const initWeb3 = async () => {
 
 export const getAccount = async (): Promise<string | null> => {
   if (web3) {
-    const accounts = await web3.eth.getAccounts();
+    const accounts = await web3?.eth.getAccounts();
     return accounts[0] || null;
   }
   return null;
@@ -46,7 +48,7 @@ export const createBook = async (
 id: number, title: string, author: string, authorAddress: string, totalSupply: number, price: number, initialRoyalty: number, resaleRoyalty: number, account: string) => {
   if (gathbookContract) {
     const gasPrice = await web3?.eth.getGasPrice();
-    return gathbookContract.methods.createBook(
+    return gathbookContract.methods.createNFTBook(
       id,
       title,
       author,
@@ -67,7 +69,7 @@ export const buyNFT = async (bookId: number, account: string, value: number) => 
   if (gathbookContract) {
     const gasPrice = await web3?.eth.getGasPrice();
     
-    return gathbookContract.methods.buyNFT(bookId).send({
+    return gathbookContract.methods.buyNFTBook(bookId).send({
       from: account,
       value: web3?.utils.toWei(value.toString(), 'ether'),
       gasPrice: gasPrice,
@@ -77,9 +79,14 @@ export const buyNFT = async (bookId: number, account: string, value: number) => 
 };
 
 
-export const DonateNFT = async (bookId: number, account: string) => {
+export const DonateNFT = async (bookId: number, recipient: string, account: string) => {
     if (gathbookContract) {
-      return gathbookContract.methods.DonateNFT(bookId, account).send();
+
+    const gasPrice = await web3?.eth.getGasPrice();
+    return gathbookContract.methods.donateNFTBook(bookId, recipient).send({
+        from: account,
+        gasPrice: gasPrice,
+    });
     }
     throw new Error("Contract is not initialized");
   };
@@ -97,11 +104,12 @@ export const buyResaleNFT = async (bookId: number, owner: string, account: strin
 };
 
 export const setResalePrice = async (bookId: number, price: number, account: string) => {
-  const priceInWei = web3?.utils.toWei(price, "ether");
   const gasPrice = await web3?.eth.getGasPrice();
+  const priceEther = web3?.utils.toWei(price.toString(), 'ether');
   if (gathbookContract) {
-    return gathbookContract.methods.setResalePrice(bookId, priceInWei).send({ 
+    return gathbookContract.methods.setResalePrice(bookId, priceEther).send({ 
       from: account,
+      gas: "3000000",
       gasPrice: gasPrice,
     });
   }
@@ -135,6 +143,13 @@ export const getUniqueOwners = async (bookId: number) => {
   }
   throw new Error("Contract is not initialized");
 };
+
+export const checkOwnership = async (bookId: number, user: string) => {
+    if (gathbookContract) {
+      return gathbookContract.methods.checkOwnership(bookId, user).call();
+    }
+    throw new Error("Contract is not initialized");
+  };
 
 export const cancelResalePrice = async (bookId: number, account: string) => {
     if (gathbookContract) {

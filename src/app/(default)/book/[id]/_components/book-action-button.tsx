@@ -1,16 +1,17 @@
 "use client";
 import type { Book } from "@/lib/types/books";
 import { getBookById } from "@/server/actions/books";
-import { getAccount, getResalePrice } from "@/server/actions/contract";
+import { checkOwnership, getAccount, getResalePrice } from "@/server/actions/contract";
 import { Button } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaBookOpen, FaGift, FaHandshake, FaMoneyBill, FaTag, FaTimes } from "react-icons/fa";
+import { FaBookOpen, FaGift, FaHandHolding, FaHandshake, FaMoneyBill, FaTag, FaTimes } from "react-icons/fa";
 import { BuyFModal } from "../_components/book-action/book-buyfriend";
 import { DonateModal } from "../_components/book-action/book-donate";
 import { ResellModal } from "../_components/book-action/book-setprice";
 import { useBuyBook } from "../_hooks/use-buy-book";
 import { useCancelResell } from "../_hooks/use-cancel-resell";
+import { useClaimBook } from "../_hooks/use-claim-book";
 
 export const BookActionButton = async ({
   id,
@@ -26,6 +27,7 @@ export const BookActionButton = async ({
   const [account, setAccount] = useState<string | null>(null);
   const [price, setPrice] = useState(0);
   const [resalePrice, setResalePrice] = useState<number | null>(null);
+  const [owned, setOwned] = useState(false);
 
   useEffect(() => {
     const fetchAccount = async () => {
@@ -33,6 +35,8 @@ export const BookActionButton = async ({
       const book = await getBookById(id);
       setPrice(book.price)
       if (currentAccount) {
+        const ownBook = await checkOwnership(id, currentAccount);
+        setOwned(ownBook);
         const resalePrice = await getResalePrice(id, currentAccount);
         setResalePrice(Number(resalePrice));
       }
@@ -41,16 +45,19 @@ export const BookActionButton = async ({
     fetchAccount();
   }, [id]);
 
-  const { mutate: buyBook, isPending: isBuyingPending } = useBuyBook(id, account!, price); 
+  const { mutate: buyBook, isPending: isBuyingPending } = useBuyBook(id, account!, price, isBought); 
   const { mutate: cancelResell, isPending: isCancelingPending } = useCancelResell(id, account);
+  const { mutate: claimBook, isPending: isClaimPending } = useClaimBook(id);
 
   const handleBuyBook = () => {
     if (account) {
-      try {
-        buyBook(); 
-      } catch (error) {
-        console.error("Error buying book:", error);
-      }
+        buyBook();
+    }
+  };
+
+  const handleClaimBook = () => {
+    if (account) {
+        claimBook(); 
     }
   };
   
@@ -62,36 +69,51 @@ export const BookActionButton = async ({
     );
   }
   
-  switch (isBought) {
+  switch (owned) {
     case false:
-      return (
-        <>
-          <p>Choose How You Want to Buy:</p>
-          <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-            <Button
-              loading={isBuyingPending}
-              onClick={handleBuyBook}
-              leftSection={<FaMoneyBill />}
-            >
-              Direct Buy
-            </Button>
-            <Button
-              onClick={() => setBuyFOpened(true)}
-              leftSection={<FaHandshake />}
-            >
-              Buy from friend
-            </Button>
-          </div>
-
-          <BuyFModal
-            opened={BuyFModalOpened}
-            onClose={() => setBuyFOpened(false)}
-            bookId={id}
-            account={account || ""} 
-          />
-        </>
-      );
+        return (
+          <>
+            <p>Choose How You Want to Buy:</p>
+            <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+              <Button
+                loading={isBuyingPending}
+                onClick={handleBuyBook}
+                leftSection={<FaMoneyBill />}
+              >
+                Direct Buy
+              </Button>
+              <Button
+                onClick={() => setBuyFOpened(true)}
+                leftSection={<FaHandshake />}
+              >
+                Buy from friend
+              </Button>
+            </div>
+  
+            <BuyFModal
+              opened={BuyFModalOpened}
+              onClose={() => setBuyFOpened(false)}
+              bookId={id}
+              account={account || ""} 
+              isBought        
+            />
+          </>
+        );
     case true:
+      if (!isBought){
+        return(<>
+        <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+        <Button
+            loading={isClaimPending}
+            onClick={handleClaimBook}
+            leftSection={<FaHandHolding />}
+          >
+            Claim 
+        </Button>
+        </div>
+        </>);
+    }
+    else{
       return (
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
@@ -146,5 +168,6 @@ export const BookActionButton = async ({
           
         </>
       );
+    }
   }
 };
