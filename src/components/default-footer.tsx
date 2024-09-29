@@ -19,7 +19,7 @@ const socialMedias = [
   },
   {
     label: "YouTube",
-    link: "https://youtube.com",
+    link: "https://www.youtube.com/@Gathbook",
     icon: <FaYoutube size="0.75rem" />,
   },
 ];

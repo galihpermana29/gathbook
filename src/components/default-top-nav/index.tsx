@@ -7,6 +7,7 @@ import type { User } from "@/lib/types/user";
 import { getServerSession } from "@/lib/utils/session";
 
 import { LogoCompact } from "../logo-compact";
+import { BecomeAuthor } from "./become-author";
 import { Collections } from "./collections";
 import { ConnectWalletButton } from "./connect-wallet-button";
 import { DashboardButton } from "./dashboard-button";
@@ -25,6 +26,9 @@ export const DefaultTopNav = async () => {
       <div className="flex items-center gap-4">
         <Suspense>
           <ProfileIndicator session={session} />
+        </Suspense>
+        <Suspense>
+          <BecomeAuthor />
         </Suspense>
         <div className="flex items-center gap-2">
           <ConnectWalletButton />
