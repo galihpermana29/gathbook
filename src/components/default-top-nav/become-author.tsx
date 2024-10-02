@@ -10,7 +10,7 @@ export const BecomeAuthor = () => {
         Become an author 
     </Button>
 
-    <ActionIcon size="lg" className="md:hidden">
+    <ActionIcon disabled size="lg" className="md:hidden">
         <FaPenNib />
     </ActionIcon>
     </>

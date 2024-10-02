@@ -43,31 +43,16 @@ const ReadPageContainer = ({ item }: AccordionComponentProps) => {
     offset: ["start start", "end end"],
   });
 
-  const xLeft = useTransform(
-    scrollYProgress,
-    [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-    [
-      "0vw",
-      "20vw",
-      "30vw",
-      "40vw",
-      "50vw",
-      "60vw",
-      "70vw",
-      "80vw",
-      "90vw",
-      "100vw",
-    ],
-  );
+  const xLeft = useTransform(scrollYProgress, [0, 3], ["0vw", "120vw"]);
 
-  const yRange = useSpring(0, { damping: 100 });
+  const yRange = useSpring(0, { damping: 30, stiffness: 120 });
 
   useMotionValueEvent(scroller, "change", (latest) => {
     const containerHeight =
       containerRef.current?.getBoundingClientRect().height || 0;
     const viewportHeight = window.innerHeight;
     const maxY = containerHeight - viewportHeight;
-    yRange.set(latest * maxY * -1 + 82);
+    yRange.set(latest * maxY * -1 + 20);
   });
 
   return (
@@ -78,7 +63,7 @@ const ReadPageContainer = ({ item }: AccordionComponentProps) => {
       <div className="relative flex h-[calc(100vh)] flex-col items-center justify-center gap-2 px-3">
         <motion.div
           className="absolute left-3 top-[80px] hidden w-fit rounded-lg bg-mtn-primary-filled p-1 text-lg font-semibold text-white lg:block"
-          transition={{ ease: "easeInOut" }}
+          transition={{ ease: "easeInOut", duration: 0.8 }}
           style={{ y: yRange }}
         >
           {item.title}
@@ -87,7 +72,7 @@ const ReadPageContainer = ({ item }: AccordionComponentProps) => {
         <motion.div
           style={{ x: xLeft }}
           className="relative w-full translate-x-[100vw]"
-          transition={{ ease: "easeInOut" }}
+          transition={{ ease: "easeInOut", duration: 0.5 }}
         >
           <StyledTitle className="text-balance text-center text-4xl md:text-6xl lg:text-8xl">
             {item.title}
