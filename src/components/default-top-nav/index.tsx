@@ -36,9 +36,7 @@ export const DefaultTopNav = async () => {
             <DashboardButton session={session} />
           </Suspense>
           <Suspense>
-            <Link className="hidden sm:block" href="/collections">
             <Collections />
-            </Link>
           </Suspense>
           <LogOutButton />
           <ThemeToggle variant="light" size="lg" />
