@@ -9,9 +9,6 @@ export const SectionTitle = () => {
       >
         SIGN IN
       </StyledTitle>
-      <p className="text-pretty text-md">
-        Delve deep into the world of literacy
-      </p>
     </div>
   );
 };

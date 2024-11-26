@@ -49,16 +49,6 @@ export const LoginForm = (props: React.HTMLAttributes<HTMLFormElement>) => {
       >
         Login
       </Button>
-      <Button
-        component={Link}
-        href="/register"
-        type="button"
-        disabled={isPending}
-        fullWidth
-        variant="default"
-      >
-        Create an account
-      </Button>
     </form>
   );
 };
