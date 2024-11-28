@@ -29,7 +29,7 @@ export const initWeb3 = async () => {
   }
   
   if (web3) {
-    gathbookContract = new web3.eth.Contract(abi, "0xd7F05A879F01a6ab1659c0000C3cAbb769b1226A");
+    gathbookContract = new web3.eth.Contract(abi, "0x9B5CdD9AcbF9975449Ca46CAb3F028a362DD3612");
     return { web3, gathbookContract }; 
   }
   return null; 
